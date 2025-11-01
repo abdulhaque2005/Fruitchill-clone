@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* General Setup: Background is fixed and matching wave color */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #4b89cc; /* BLUE BACKGROUND */
+    overflow: hidden; 
+}
+
+.main-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* 1. Fixed Content: कंटेंट स्थिर रहेगा */
+.fixed-content-wrapper {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* कंटेंट वेव के ऊपर */
+}
+
+/* आपके कंटेंट कंटेनर का स्टाइल */
+.container-3 {
+    display: flex;
+    background: white; /* CONTENT COLOR */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* आपके बाकी कंटेंट स्टाइल्स यहाँ जोड़ें */
+}
+
+/* 2. Wave Containers (Visible Area - इसका रंग कंटेंट के रंग जैसा है) */
+.wave-container {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    z-index: 5;
+    overflow: hidden; 
+    background-color: white; /* CONTENT COLOR */
+}
+
+.wave-top { top: 0; }
+.wave-bottom { bottom: 0; }
+
+/* 3. Wave Shape and Animation */
+.wave-container::before {
+    content: '';
+    position: absolute;
+    /* DOUBLE WIDTH for seamless horizontal scrolling */
+    width: 200%; 
+    height: 150px; 
+    
+    /* WAVE COLOR: Background Color */
+    background-color: #4b89cc; 
+    
+    /* Wave Shape */
+    border-radius: 45% 55% 40% 60% / 60% 40% 60% 40%;
+    
+    /* वेव को कर्व में एडजस्ट करना */
+    top: -50px; 
+    left: 0;
+    
+    /* **पानी की लहर का इफ़ेक्ट**: दो एनीमेशन एक साथ, अनंत समय तक */
+    animation: 
+        horizontal-scroll 10s linear infinite, /* क्षैतिज गति */
+        vertical-oscillation 2s ease-in-out infinite alternate; /* ऊपर-नीचे गति */
+}
+
+/* 4. Layer Specific Adjustments (Depth) */
+.layer-2::before {
+    top: -60px;
+    opacity: 0.8;
+    animation: 
+        horizontal-scroll 14s linear infinite reverse, /* धीमी और उल्टी दिशा */
+        vertical-oscillation 3s ease-in-out infinite alternate;
+}
+
+/* बॉटम वेव */
+.wave-bottom::before {
+    transform: rotate(180deg);
+    top: unset; 
+    bottom: -50px; 
+    animation: 
+        horizontal-scroll 11s linear infinite,
+        vertical-oscillation 2.5s ease-in-out infinite alternate;
+}
+
+/* 5. Keyframes */
+
+/* 5.1 Horizontal Scroll: वेव को हमेशा आगे बढ़ाता है */
+@keyframes horizontal-scroll {
+    0% { transform: translateX(0) rotate(180deg); }
+    100% { transform: translateX(-100%) rotate(180deg); }
+}
+
+/* 5.2 Vertical Oscillation: वेव को ऊपर-नीचे हिलाता है (पानी की लहर जैसा) */
+@keyframes vertical-oscillation {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); } /* 10px ऊपर-नीचे हिलना */
+}
+    </style>
+</head>
+<body>
+    <div class="main-container">
+
+    <div class="wave-container wave-top layer-1"></div>
+    <div class="wave-container wave-top layer-2"></div> 
+
+    <div class="fixed-content-wrapper">
+        
+        <div class="container-3"> 
+            <div class="box-6"> 
+                <img src="https://fruitchillpops.com/cdn/shop/files/nimbu_2-removebg-preview_1_1_1-2_1_1.png?v=1744719340&width=750" alt="Nimbu Image"> 
+            </div> 
+            <div class="box-5"> 
+                <img src="https://fruitchillpops.com/cdn/shop/files/naughty_nimbo.png?v=1745050970&width=750" alt="Naughty Nimbo Image"> 
+                <h1 class="bold-1"><b> Bring home the glory of grapes with sweet and frozen juice bars! Indulge in a taste that’s superfun till it lasts.</b></h1> 
+                <div class="box2-e"> 
+                    <a href="" style="color:green;">Buy Now</a> 
+                    <div class="round5"> &#10145 </div> 
+                </div> 
+            </div> 
+        </div>
+
+    </div>
+
+    <div class="wave-container wave-bottom layer-1"></div>
+    <div class="wave-container wave-bottom layer-2"></div>
+</div>
+</body>
+</html>
